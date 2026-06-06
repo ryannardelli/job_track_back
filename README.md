@@ -25,6 +25,7 @@ The system ensures secure, efficient, and structured data management, allowing u
   ┣ 📁 controllers/ → Handle HTTP requests and delegate to services
   ┣ 📁 dtos/ → Data Transfer Objects (optional but recommended)
   ┣ 📁 exceptions/ → Custom error classes and centralized error handling
+  ┣ 📁 middlewares/ → Middleware functions (auth, validation, logging, etc.)
   ┣ 📁 models/ → Database models (Sequelize, Prisma, or Mongoose)
   ┣ 📁 repositories/ → Data access layer (ORM queries and database communication)
   ┣ 📁 routes/ → Application routes organized by modules
