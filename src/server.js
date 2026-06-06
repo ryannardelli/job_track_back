@@ -18,13 +18,31 @@ async function connectDB() {
     await sequelize.authenticate();
     console.log("Conectado ao banco PostgreSQL com sucesso!");
 
+    const User = require("./models/User");
+    const Application = require("./models/Application");
+
+    User.hasMany(Application, {
+      foreignKey: "userId",
+      as: "applications"
+    });
+
+    Application.belongsTo(User, {
+      foreignKey: "userId",
+      as: "user"
+    });
 
     await sequelize.sync();
     console.log("Tabelas sincronizadas com sucesso!");
 
+    const server = http.createServer(app);
+
+    server.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+
   } catch (error) {
     console.error("Erro ao conectar com o banco:", error);
-
   }
 }
-  connectDB();
+
+connectDB();

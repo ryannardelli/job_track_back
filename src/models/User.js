@@ -2,10 +2,10 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../configs/database");
 
 const User = sequelize.define("User", {
-    id: {
-        type: DataTypes.INTEGER,
+    uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
     },
 
     name: {
@@ -33,18 +33,11 @@ const User = sequelize.define("User", {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-
-    companyId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: "application",
-            key: "id"
-        }
     }
 }, {
     tableName: "users",
-    freezeTableName: true
+    freezeTableName: true,
+    timestamps: true
 });
 
 module.exports = User;
