@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/ryannardelli/job_track_back#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
