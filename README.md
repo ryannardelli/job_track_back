@@ -13,6 +13,7 @@ The system ensures secure, efficient, and structured data management, allowing u
 ## Tech Stack & Technologies Used
 - Node.js
 - Express.js
+- Sequelize ORM
 - PostgreSQL
 - Docker & Docker Compose
 
