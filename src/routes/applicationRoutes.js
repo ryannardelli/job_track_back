@@ -50,7 +50,7 @@ const { checkToken } = require("../middleware/checkToken");
 
 /**
  * @swagger
- * /applications:
+ * /application:
  *   post:
  *     summary: Cria uma nova candidatura
  *     tags: [Applications]

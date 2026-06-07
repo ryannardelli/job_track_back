@@ -26,6 +26,11 @@ module.exports = {
         status
       }
     }),
+  
+    countByUser: (userId) =>
+      Application.count({
+        where: { userId }
+    }),
 
   countByStatus: async (userId, status) =>
     Application.count({
