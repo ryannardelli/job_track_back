@@ -202,6 +202,29 @@ async function deleteApplication(
     };
 }
 
+async function getBoard(userId) {
+    const applications =
+        await applicationRepository.findAllByUser(userId);
+
+    return {
+        WISHLIST: applications.filter(
+            app => app.status === "WISHLIST"
+        ),
+        APPLIED: applications.filter(
+            app => app.status === "APPLIED"
+        ),
+        INTERVIEW: applications.filter(
+            app => app.status === "INTERVIEW"
+        ),
+        OFFER: applications.filter(
+            app => app.status === "OFFER"
+        ),
+        REJECTED: applications.filter(
+            app => app.status === "REJECTED"
+        )
+    };
+}
+
 module.exports = {
     getAllApplications,
     getApplicationsByUser,
@@ -209,5 +232,6 @@ module.exports = {
     createApplication,
     updateApplication,
     updateApplicationStatus,
+    getBoard,
     deleteApplication
 };
