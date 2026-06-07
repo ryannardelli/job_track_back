@@ -1,6 +1,6 @@
 function toUserDto(user) {
     return {
-        id: user.id,
+        uuid: user.uuid,
         name: user.name,
         email: user.email,
         createdAt: user.createdAt,

@@ -42,7 +42,7 @@ async function createUser({ name, email, password }) {
 
   const token = jwt.sign(
     {
-      id: user.id,
+      uuid: user.uuid,
       email: user.email,
     },
     process.env.JWT_SECRET,
@@ -55,7 +55,7 @@ async function createUser({ name, email, password }) {
     message: "Usuário criado com sucesso!",
     token,
     user: {
-      id: user.id,
+      uuid: user.uuid,
       name: user.name,
       email: user.email,
     },
@@ -74,7 +74,7 @@ async function login({ email, password }) {
   try {
     const secret = process.env.JWT_SECRET;
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role }, 
+      { uuid: user.uuid, email: user.email, role: user.role }, 
       secret, 
       { expiresIn: '1h' }
     );
@@ -82,7 +82,7 @@ async function login({ email, password }) {
     return {
       token,
       user: {
-        id: user.id,
+        uuid: user.uuid,
         name: user.name,
         email: user.email,
       },

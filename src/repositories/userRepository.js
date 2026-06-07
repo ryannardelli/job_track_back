@@ -3,7 +3,7 @@ const User = require("../models/User");
 module.exports = {
   findAll: () => User.findAll(),
 
-  findById: (id) => User.findByPk(id),
+  findByUuid: (uuid) => User.findByPk(uuid),
 
   findByEmail: (email) =>
     User.findOne({

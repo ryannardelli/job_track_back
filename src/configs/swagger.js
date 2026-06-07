@@ -5,12 +5,12 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Redapro",
+      title: "JobTrack",
       version: "1.0.0",
       description: "Documentação para o sistema desenvolvido em Node.js",
     },
   },
-  apis: ["./src/routers/*.js"],
+  apis: ["./src/routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
