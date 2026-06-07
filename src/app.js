@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRouters");
+const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 const handleError = require("./middleware/handleError");
@@ -19,6 +20,7 @@ app.use(express.json());
 // Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/application", applicationRoutes);
 
 // Swagger
 const { swaggerUi, swaggerSpec } = require("./configs/swagger");

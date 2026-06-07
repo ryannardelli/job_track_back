@@ -5,7 +5,7 @@ const InvalidNameError = require("../../exceptions/domain/auth/InvalidNameError"
 const InvalidCredentialsError = require("../../exceptions/domain/auth/InvalidCredentialsError");
 
 const bcrypt = require("bcryptjs");
-const UserNotFoundError = require("../../exceptions/domain/auth/UserNotFoundError");
+const UserNotFoundError = require("../../exceptions/domain/users/UserNotFoundError");
 
 const jwt = require('jsonwebtoken');
 

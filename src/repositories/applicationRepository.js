@@ -10,6 +10,15 @@ module.exports = {
       where: { userId }
     }),
 
+  findByCompanyAndPosition: (userId, company, position) =>
+    Application.findOne({
+      where: {
+        userId,
+        company,
+        position
+      }
+    }),
+
   findByStatus: (userId, status) =>
     Application.findAll({
       where: {

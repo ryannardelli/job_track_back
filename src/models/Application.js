@@ -1,3 +1,6 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require("../configs/database");
+
 const Application = sequelize.define("Application", {
   uuid: {
     type: DataTypes.UUID,
@@ -54,3 +57,5 @@ const Application = sequelize.define("Application", {
   freezeTableName: true,
   timestamps: true,
 });
+
+module.exports = Application;

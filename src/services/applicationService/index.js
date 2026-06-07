@@ -2,6 +2,7 @@ const ApplicationNotFoundError = require("../../exceptions/domain/applications/A
 const ApplicationAlreadyExistsError = require("../../exceptions/domain/applications/ApplicationAlreadyExistsError");
 const ApplicationForbiddenError = require("../../exceptions/domain/applications/ApplicationForbiddenError");
 const ApplicationValidationError = require("../../exceptions/domain/applications/ApplicationValidationError");
+const UserNotFoundError = require("../../exceptions/domain/users/UserNotFoundError");
 
 const applicationRepository = require("../../repositories/applicationRepository");
 const userRepository = require("../../repositories/userRepository");
@@ -10,8 +11,12 @@ async function getAllApplications(userId, filters = {}) {
     return applicationRepository.findAllByUser(userId, filters);
 }
 
-async function getApplicationById(applicationId, userId) {
-    const application = await applicationRepository.findById(applicationId);
+async function getApplicationsByUser(userId) {
+    return applicationRepository.findAllByUser(userId);
+}
+
+async function getApplicationByUuid(applicationId, userId) {
+    const application = await applicationRepository.findByUuid(applicationId);
 
     if (!application) {
         throw new ApplicationNotFoundError();
@@ -25,7 +30,7 @@ async function getApplicationById(applicationId, userId) {
 }
 
 async function createApplication(data, userId) {
-    const user = await userRepository.findById(userId);
+    const user = await userRepository.findByUuid(userId);
 
     if (!user) {
         throw new UserNotFoundError();
@@ -70,7 +75,7 @@ async function updateApplication(
     updateDto,
     userId
 ) {
-    const application = await applicationRepository.findById(
+    const application = await applicationRepository.findByUuid(
         applicationId
     );
 
@@ -134,7 +139,7 @@ async function updateApplication(
         updateData
     );
 
-    return applicationRepository.findById(applicationId);
+    return applicationRepository.findByUuid(applicationId);
 }
 
 async function updateApplicationStatus(
@@ -142,7 +147,7 @@ async function updateApplicationStatus(
     status,
     userId
 ) {
-    const application = await applicationRepository.findById(
+    const application = await applicationRepository.findByUuid(
         applicationId
     );
 
@@ -178,7 +183,7 @@ async function deleteApplication(
     applicationId,
     userId
 ) {
-    const application = await applicationRepository.findById(
+    const application = await applicationRepository.findByUuid(
         applicationId
     );
 
@@ -199,7 +204,8 @@ async function deleteApplication(
 
 module.exports = {
     getAllApplications,
-    getApplicationById,
+    getApplicationsByUser,
+    getApplicationByUuid,
     createApplication,
     updateApplication,
     updateApplicationStatus,
