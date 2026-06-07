@@ -50,7 +50,7 @@ const { checkToken } = require("../middleware/checkToken");
 
 /**
  * @swagger
- * /application:
+ * /applications:
  *   post:
  *     summary: Cria uma nova candidatura
  *     tags: [Applications]
@@ -71,13 +71,34 @@ const { checkToken } = require("../middleware/checkToken");
  *                 example: Google
  *               position:
  *                 type: string
- *                 example: Desenvolvedor Front-end
+ *                 example: Desenvolvedor Full Stack
+ *               vacancyUrl:
+ *                 type: string
+ *                 format: uri
+ *                 example: https://careers.google.com/jobs/results/123456
  *               status:
  *                 type: string
+ *                 enum:
+ *                   - WISHLIST
+ *                   - APPLIED
+ *                   - INTERVIEW
+ *                   - OFFER
+ *                   - REJECTED
  *                 example: WISHLIST
+ *               applicationDate:
+ *                 type: string
+ *                 format: date
+ *                 example: 2026-06-07
+ *               notes:
+ *                 type: string
+ *                 example: Vaga encontrada pelo LinkedIn. Requisitos compatíveis com meu perfil.
  *     responses:
  *       201:
  *         description: Candidatura criada com sucesso
+ *       400:
+ *         description: Dados inválidos
+ *       401:
+ *         description: Não autenticado
  */
 router.post("/", checkToken, applicationController.create);
 
@@ -137,7 +158,7 @@ router.get("/:uuid", checkToken, applicationController.findByUuid);
  * @swagger
  * /application/{uuid}:
  *   patch:
- *     summary: Atualiza uma candidatura
+ *     summary: Atualiza os dados de uma candidatura
  *     tags: [Applications]
  *     security:
  *       - bearerAuth: []
@@ -158,19 +179,26 @@ router.get("/:uuid", checkToken, applicationController.findByUuid);
  *             properties:
  *               company:
  *                 type: string
+ *                 example: Google
  *               position:
  *                 type: string
- *               status:
+ *                 example: Desenvolvedor Full Stack
+ *               vacancyUrl:
  *                 type: string
- *                 enum:
- *                   - WISHLIST
- *                   - APPLIED
- *                   - INTERVIEW
- *                   - OFFER
- *                   - REJECTED
+ *                 format: uri
+ *                 example: https://careers.google.com/jobs/results/123456
+ *               applicationDate:
+ *                 type: string
+ *                 format: date
+ *                 example: 2026-06-07
+ *               notes:
+ *                 type: string
+ *                 example: Entrevista marcada para a próxima semana.
  *     responses:
  *       200:
  *         description: Candidatura atualizada com sucesso
+ *       403:
+ *         description: Usuário não possui acesso a esta candidatura
  *       404:
  *         description: Candidatura não encontrada
  */

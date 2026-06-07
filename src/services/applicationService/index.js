@@ -22,10 +22,6 @@ async function getApplicationByUuid(applicationId, userId) {
         throw new ApplicationNotFoundError();
     }
 
-    if (application.userId !== userId) {
-        throw new ApplicationForbiddenError();
-    }
-
     return application;
 }
 
@@ -109,23 +105,6 @@ async function updateApplication(
         updateData.position = updateDto.position.trim();
     }
 
-    if (updateDto.status !== undefined) {
-        const allowedStatus = [
-            "APPLIED",
-            "INTERVIEW",
-            "OFFER",
-            "REJECTED"
-        ];
-
-        if (!allowedStatus.includes(updateDto.status)) {
-            throw new ApplicationValidationError(
-                "Status inválido."
-            );
-        }
-
-        updateData.status = updateDto.status;
-    }
-
     if (updateDto.link !== undefined) {
         updateData.link = updateDto.link;
     }
@@ -150,6 +129,7 @@ async function updateApplicationStatus(
     const application = await applicationRepository.findByUuid(
         applicationId
     );
+    
 
     if (!application) {
         throw new ApplicationNotFoundError();
@@ -163,7 +143,8 @@ async function updateApplicationStatus(
         "APPLIED",
         "INTERVIEW",
         "OFFER",
-        "REJECTED"
+        "REJECTED",
+        "WISHLIST"
     ];
 
     if (!allowedStatus.includes(status)) {

@@ -14,9 +14,10 @@ async function create(req, res, next) {
                 req.user.uuid
             );
 
-        return res.status(201).json(
-            toApplicationDto(application)
-        );
+        return res.status(201).json({
+            message: "Candidatura criada com sucesso!",
+            data: toApplicationDto(application)
+        });
     } catch (err) {
         next(err);
     }
@@ -52,15 +53,20 @@ async function findByUuid(req, res, next) {
 
 async function update(req, res, next) {
     try {
-        const updateDto = {
-            uuid: req.params.uuid,
-            ...toUpdateDto(req.body)
-        };
+        const { uuid } = req.params;
 
-        await applicationService.updateApplication(updateDto);
+        const updateDto = toUpdateDto(req.body);
+
+        const application =
+            await applicationService.updateApplication(
+                uuid,
+                updateDto,
+                req.user.uuid
+            );
 
         return res.status(200).json({
-            message: "Candidatura atualizada com sucesso!"
+            message: "Candidatura atualizada com sucesso!",
+            data: toApplicationDto(application)
         });
     } catch (err) {
         next(err);
@@ -72,13 +78,16 @@ async function updateStatus(req, res, next) {
         const { uuid } = req.params;
         const { status } = req.body;
 
-        await applicationService.updateApplicationStatus(
-            uuid,
-            status
-        );
+        const application =
+            await applicationService.updateApplicationStatus(
+                uuid,
+                status,
+                req.user.uuid
+            );
 
         return res.status(200).json({
-            message: "Status atualizado com sucesso!"
+            message: "Status atualizado com sucesso!",
+            application: toApplicationDto(application)
         });
     } catch (err) {
         next(err);
