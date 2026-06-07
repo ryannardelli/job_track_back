@@ -98,7 +98,10 @@ async function remove(req, res, next) {
     try {
         const { uuid } = req.params;
 
-        await applicationService.deleteApplication(uuid);
+        await applicationService.deleteApplication(
+            uuid,
+            req.user.uuid
+        );
 
         return res.status(200).json({
             message: "Candidatura removida com sucesso!"
