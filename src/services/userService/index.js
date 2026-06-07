@@ -1,4 +1,4 @@
-const UserNotFoundError = require("../../exceptions/domain/auth/UserNotFoundError");
+const UserNotFoundError = require("../../exceptions/domain/users/UserNotFoundError");
 
 const userRepository = require('../../repositories/userRepository');
 
