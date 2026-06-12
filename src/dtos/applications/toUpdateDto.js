@@ -3,6 +3,7 @@ function toUpdateDto(body) {
         company: body.company,
         position: body.position,
         vacancyUrl: body.vacancyUrl,
+        status: body.status,
         applicationDate: body.applicationDate,
         notes: body.notes
     };

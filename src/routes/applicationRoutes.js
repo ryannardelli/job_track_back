@@ -194,6 +194,15 @@ router.get("/:uuid", checkToken, applicationController.findByUuid);
  *               notes:
  *                 type: string
  *                 example: Entrevista marcada para a próxima semana.
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - APPLIED
+ *                   - INTERVIEW
+ *                   - OFFER
+ *                   - REJECTED
+ *                   - WISHLIST
+ *                 example: INTERVIEW
  *     responses:
  *       200:
  *         description: Candidatura atualizada com sucesso

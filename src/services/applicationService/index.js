@@ -113,6 +113,11 @@ async function updateApplication(
         updateData.notes = updateDto.notes;
     }
 
+    if (updateDto.status !== undefined) {
+        updateData.status = updateDto.status;
+    }
+
+
     await applicationRepository.update(
         application,
         updateData
